@@ -1,46 +1,30 @@
 from flask import Blueprint, request, jsonify
-
-from api.auth.AuthAPI import AuthAPI
-from api.auth.jwt_token import *
+from api.apiclass.AuthAPI import AuthAPI
+from api.DB.dbclass.humansclass import User
+from api.auth.jwt_token import create_token
 
 auth = Blueprint('auth', __name__, url_prefix='/api/auth')
 
-
 @auth.post('/registration')
-def register_user():
-    Auth = AuthAPI()
-    login = request.json[ 'login' ]
-    password = request.json[ 'password' ]
-    confirm_password = request.json[ 'confirm_password' ]
-    nickname = request.json[ 'nickname' ]
-    error = user_valid.validate_register(login, password, confirm_password, nickname)
-    if error:
-        return jsonify(error=error)
+def registration():
+    authAPI = AuthAPI()
+    user = User()
+    body = request.json
+    user.login, user.password, user.name, user.surname, user.patronymic, user.phone_number = body.values()
+    response = authAPI.registration(user)
+    if response == 'user in db':
+        return jsonify(error='Пользователь уже зарегистрирован')
+    del response['password']
+    token = create_token({'id': response['id']})
+    return jsonify(user=response, token=token)
 
-    Auth.registration(login, password, nickname)
-
-    if Auth.error == "Данный логин занят":
-        return jsonify(error="Данный логин занят")
-
-    user = Auth.user.__dict__
-    token = create_token({'id': user[ 'id' ]})
-    del user[ 'password' ]
-    return jsonify(user=user, token=token)
-
-
-@auth.post('/login')
-def login_user():
-    Auth = AuthAPI()
-    login = request.json[ 'login' ]
-    password = request.json[ 'password' ]
-    Auth.login(login, password)
-    print(request.json)
-    print(Auth.error)
-    if Auth.error == 'Нет такого пользователя':
-        # abort(401)
-        return jsonify(error="Неверный логин или пароль")
-
-    user = Auth.user.__dict__
-    token = create_token({'id': user[ 'id' ]})
-    del user[ 'password' ]
-    return jsonify(user=user, token=token)
+@auth.post('/authorization')
+def authorization():
+    authAPI = AuthAPI()
+    body = request.json
+    login, password = body.get('login'), body.get('password')
+    response = authAPI.authorization(login, password)
+    if response == 'user not in db':
+        return jsonify(error='Неверный логин или пароль')
+    token = create_token({'id': response['id']})
+    return jsonify(user=response, token=token)

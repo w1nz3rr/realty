@@ -1,12 +1,11 @@
-from flask import Flask
+from flask import Flask, request
+from api.auth.auth import auth
+from flask_jwt_extended import JWTManager
 
 app = Flask(__name__)
-
-
-@app.route('/')
-def hello_world():  # put application's code here
-    return 'Hello World!'
-
+app.register_blueprint(auth)
+jwt = JWTManager(app)
+app.config['JWT_SECRET_KEY'] = 'SECRET_KEY'
 
 if __name__ == '__main__':
     app.run()

@@ -11,9 +11,21 @@ class DB:
     def __init__(self):
         self.create_connection()
 
+
     def create_connection(self):
         self.connect = pyodbc.connect(self.data_connect)
         self.cursor = self.connect.cursor()
+        self.connect.autocommit = True
+
+    def execute_procedure(self, procedure, *args):
+        if args:
+            self.cursor.execute(procedure, *args)
+        else:
+            self.cursor.execute(procedure)
+        return self.cursor.fetchall()
+
+
+
 
     def execute_query(self, query, *args, is_select=False):
         flag = True
@@ -45,5 +57,9 @@ class DB:
     def close_connection(self):
         self.cursor.close()
         self.connect.close()
+
+
+
+
 
 
