@@ -2,7 +2,7 @@ import pyodbc
 
 
 class DB:
-    data_connect = r'Driver={SQL Server};Server=calculation_finances.mssql.somee.com;Database=calculation_finances;UID=w1nz3rr_SQLLogin_1;PWD=r8u6xqat6y'
+    data_connect = r'Driver={SQL Server};Server=DB_Realty.mssql.somee.com;Database=DB_Realty;UID=nnnnnn1k_SQLLogin_1;PWD=9lmrvly3rc'
     connect = None
     cursor = None
     cache = None
@@ -47,5 +47,3 @@ class DB:
         self.connect.close()
 
 
-db = DB()
-db.execute_query('select * from users', is_select=True)
