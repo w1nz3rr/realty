@@ -14,4 +14,3 @@ class User(Human):
 class Profession(Human):
     license_id: str
     company_name: str
-

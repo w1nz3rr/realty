@@ -1,8 +1,9 @@
-from api.DB.db import DB
 from datetime import datetime
 
-class AuthAPI(DB):
+from api.DB.db import DB
 
+
+class AuthAPI(DB):
 
     def take_user(self, login):
         query = 'select * from users where login = ?'
@@ -23,5 +24,3 @@ class AuthAPI(DB):
         query = 'select * from users where login = ? and password = ?'
         self.execute_query(query, login, password, is_select=True)
         self.set_user()
-
-
