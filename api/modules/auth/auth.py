@@ -1,30 +1,33 @@
 from flask import Blueprint, request, jsonify
-from api.apiclass.AuthAPI import AuthAPI
-from api.DB.dbclass.humansclass import User
+from api.DB.db import DB
 from api.modules.auth.jwt_token import create_token
 
 auth = Blueprint('auth', __name__, url_prefix='/api/auth')
+db = DB()
 
 @auth.post('/registration')
 def registration():
-    authAPI = AuthAPI()
-    user = User()
-    body = request.json
-    user.login, user.password, user.name, user.surname, user.patronymic, user.phone_number = body.values()
-    response = authAPI.registration(user)
-    if response == 'user in db':
+    user = request.json
+    procedure = f'exec registration {user["login"]}, {user["password"]}, {user["name"]}, {user["surname"]}, {user["patronymic"]}, {user["phone_number"]}'
+    result = db.execute_procedure(procedure)[0]
+    if result[0] == 'user in db':
         return jsonify(error='Пользователь уже зарегистрирован')
-    del response['password']
-    token = create_token({'id': response['id']})
-    return jsonify(user=response, token=token)
+    else:
+        user['id'] = result[0]
+    del user['password']
+    token = create_token({'id': user['id']})
+    return jsonify(user=user, token=token)
 
 @auth.post('/authorization')
 def authorization():
-    authAPI = AuthAPI()
-    body = request.json
-    login, password = body.get('login'), body.get('password')
-    response = authAPI.authorization(login, password)
-    if response == 'user not in db':
+    login, password = request.json.get('login'), request.json.get('password')
+    procedure = f'exec login {login}, {password}'
+    result = db.execute_procedure(procedure)[0]
+    if result[0] == 'user not in db':
         return jsonify(error='Неверный логин или пароль')
-    token = create_token({'id': response['id']})
-    return jsonify(user=response, token=token)
+
+    user = {'id': result[0], 'login': result[1], 'name': result[3],
+                'surname': result[4], 'patronymic': result[5], 'phone_number': result[6]}
+    token = create_token({'id': user['id']})
+    return jsonify(user=user, token=token)
+

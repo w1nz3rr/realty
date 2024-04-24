@@ -1,31 +1,42 @@
 from flask import Blueprint, jsonify, request, abort
-from api.apiclass.CompanyAPI import CompanyAPI
 from api.modules.auth.jwt_token import *
+from api.DB.db import DB
 
 company = Blueprint('company', __name__, url_prefix='/api/company')
+db = DB()
 
 @company.get('/<type>')
 def get_companyes(type):
-    companyAPI = CompanyAPI()
-    response = companyAPI.get_companyes(type)
-    if response == 'error':
-        return abort(404)
-    elif response == 'no company':
+    procedure = f'exec get_companyes {type}'
+    result = db.execute_procedure(procedure)
+
+    if not result:
         return jsonify(error='no company')
+    elif result[0][0] == 'error':
+        return abort(404)
     else:
-        comp = type+'company'
-        return jsonify(comp=response)
+        results = []
+        for res in result:
+            results.append({'company_id': res[0], 'company_name': res[1], 'phone_number': res[2]})
+        comp = type + 'company'
+        return jsonify({f'{type}_company': results})
+
+
 
 @company.post('/<type>')
 def post_companyes(type):
-    companyAPI = CompanyAPI()
     name = request.json.get('company_name', None)
     phone = request.json.get('phone_number', None)
-    response = companyAPI.post_companyes(type, name, phone)
-    if response == 'error':
-        return abort(404)
-    elif response == 'no company':
+
+    procedure = f'exec post_companyes {table}, {name}, {phone}'
+    result = db.execute_procedure(procedure)
+
+    if not result:
         return jsonify(error='no company')
+    elif result[0][0] == 'error':
+        return abort(404)
     else:
-        comp = type + 'company'
-        return jsonify(comp=response)
+        results = []
+        for res in result:
+            results.append({'company_id': res[0], 'company_name': res[1], 'phone_number': res[2]})
+        return jsonify({f'{type}_company': results})
