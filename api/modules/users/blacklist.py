@@ -8,12 +8,10 @@ db = DB()
 @jwt_required()
 @blacklist.post('/')
 def post_blacklist(user_id):
-
     token = request.headers['Authorization']
     self_id = decode_jwt(token)
     procedure = f'exec post_blacklist {self_id}, {user_id}'
     result = db.execute_procedure(procedure)[0]
-
     if result[0] == 'user in blacklist':
         return jsonify(error='user in blacklist')
     else:
@@ -22,7 +20,6 @@ def post_blacklist(user_id):
 @jwt_required()
 @blacklist.delete('/')
 def delete_blacklist(user_id):
-
     token = request.headers['Authorization']
     self_id = decode_jwt(token)
     procedure = f'exec delete_blacklist {self_id}, {user_id}'
