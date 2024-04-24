@@ -16,5 +16,6 @@ class AuthAPI(DB):
         if result[0] == 'user not in db':
             return 'user not in db'
         else:
-            return {'id': result[0], 'login': result[1], 'name': result[3], 'surname': result[4], 'patronymic': result[5], 'phone_number': result[6]}
+            return {'id': result[0], 'login': result[1], 'name': result[3],
+                    'surname': result[4], 'patronymic': result[5], 'phone_number': result[6]}
 

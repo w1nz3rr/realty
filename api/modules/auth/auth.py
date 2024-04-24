@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from api.apiclass.AuthAPI import AuthAPI
 from api.DB.dbclass.humansclass import User
-from api.auth.jwt_token import create_token
+from api.modules.auth.jwt_token import create_token
 
 auth = Blueprint('auth', __name__, url_prefix='/api/auth')
 

@@ -1,21 +1,21 @@
 localhost/api/
 
--/auth - аутентификация (no method)
---/login - вход (post)
---/registration - регистрация (post)
+-/auth - аутентификация (no method) +
+--/login - вход (post) +
+--/registration - регистрация (post) +
 
 
--/company - компании (нотариус | юрист | риелтор) (no method)
---/(lawyer|realtor|notary|) -  список компаний (нотариус | юрист | риелтор) (get, post)
+-/company - компании (нотариус | юрист | риелтор) (no method) +
+--/(lawyer|realtor|notary|) -  список компаний (нотариус | юрист | риелтор) (get, post) ++
 ---/<company_id> - конкретная компания (get, put, delete)
 ----/agents - агенты конкретной компании (get, post)
 -----/<agents_id> конкретный агент (get, put, delete)
 
 
--/users - пользователи - (no method)
---/<user_id> - посмотреть конкретного пользователя (get)
+-/users - пользователи - (no method) +
+--/<user_id> - посмотреть конкретного пользователя (get) +
 ---/complaints - жалоба (get, post, put, delete)
----/blacklist - чёрный список (get, delete)
+---/blacklist - чёрный список (post, delete) ++
 
 
 --/me - посмотреть себя (get, put, delete)
@@ -26,6 +26,7 @@ localhost/api/
 
 
 --/chats - чаты (get, post)
+---/<chat_id> - конкретный чат (get, delete)
 ---/<chat_id>/message/<message_id> - конкретное сообщение (get, put, delete)
 
 
