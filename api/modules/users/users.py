@@ -10,7 +10,7 @@ def get_user(user_id):
     procedure = f'exec get_user {user_id}'
     result = db.execute_procedure(procedure)[0]
     if result[0] == 'user not in db':
-        return jsonify(error=response)
+        return jsonify(error=result)
     else:
         user =  {'id': result[0], 'login': result[1], 'name': result[3],
                 'surname': result[4], 'patronymic': result[5], 'phone_number': result[6]}

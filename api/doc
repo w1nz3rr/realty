@@ -7,7 +7,7 @@ localhost/api/
 
 -/company - компании (нотариус | юрист | риелтор) (no method) +
 --/(lawyer|realtor|notary|) -  список компаний (нотариус | юрист | риелтор) (get, post) ++
----/<company_id> - конкретная компания (get, put, delete)
+---/<company_id> - конкретная компания (get, put, delete) +
 ----/agents - агенты конкретной компании (get, post)
 -----/<agents_id> конкретный агент (get, put, delete)
 
