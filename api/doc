@@ -14,7 +14,7 @@ localhost/api/
 
 -/users - пользователи - (no method) +
 --/<user_id> - посмотреть конкретного пользователя (get) +
----/complaints - жалоба (get, post, put, delete)
+---/complaints - жалоба (get, post) ++
 ---/blacklist - чёрный список (post, delete) ++
 
 
