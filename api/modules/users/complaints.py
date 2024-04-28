@@ -33,4 +33,3 @@ def post_complaints(user_id):
     data = {'complaints_id': response[0], 'self_id': response[1], 'user_id': response[2],
             'reason': response[3], 'description': response[4], 'create_at': response[5]}
     return jsonify(complaints=data)
-
