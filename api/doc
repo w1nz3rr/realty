@@ -7,27 +7,30 @@ localhost/api/
 
 -/company - компании (нотариус | юрист | риелтор) (no method) +
 --/(lawyer|realtor|notary|) -  список компаний (нотариус | юрист | риелтор) (get, post) ++
----/<company_id> - конкретная компания (get, put, delete) +
-----/agents - агенты конкретной компании (get, post)
------/<agents_id> конкретный агент (get, put, delete)
+---/<company_id> - конкретная компания (get, put, delete) +++
+продумать взаимодействие этих модулей
+-/specialist - специалисты (no method)
+--/(lawyer|realtor|notary|) - специалисты этой области (get, post)
+---/<specialist_id> конкретный специалист (get, put, delete)
 
 
 -/users - пользователи - (no method) +
 --/<user_id> - посмотреть конкретного пользователя (get) +
 ---/complaints - жалоба (get, post) ++
----/blacklist - чёрный список (post, delete) ++
+---/blacklist - чёрный список (post, delete) +++
 
 
 --/me - посмотреть себя (get, put, delete)
 ---/requisites - реквизиты (get, post)
 ----/<requisite_id> - конкретный реквизит (get, put, delete)
----/favourites - избранное (get)
+---/favourites - избранное (get, post)
 ----/<favourites_id> - конкретное объявление из избранного (get, delete)
 
 
 --/chats - чаты (get, post)
 ---/<chat_id> - конкретный чат (get, delete)
----/<chat_id>/message/<message_id> - конкретное сообщение (get, put, delete)
+----/message - все сообщения этого чата (get, post)
+-----/<message_id> - конкретное сообщение (get, put, delete)
 
 
 -/advertisements - объявления (get, post)
@@ -38,10 +41,10 @@ localhost/api/
 
 -/objects - объекты - (get, post)
 --/<object_id> - конкретный объект (get, put, delete)
----/address - адрес объекта (get, put) (может быть пустым)
----/passport - паспорт объекта (get, put) (может быть пустым)
-----/contractor - информация о подрядчике (get, put) (может быть пустым)
-----/builder - информация о застройщике (get, put) (может быть пустым)
+---/address - адрес объекта (get, put)
+---/passport - паспорт объекта (get, put)
+----/contractor - информация о подрядчике (get, put)
+----/builder - информация о застройщике (get, put)
 
 
 -/deals - сделки (get, post)
