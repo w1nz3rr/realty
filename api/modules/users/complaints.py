@@ -22,11 +22,11 @@ def get_complaints(user_id):
 @jwt_required()
 @complaints.post('/')
 def post_complaints(user_id):
-    reason = request.json.get('reason')
-    description = request.json.get('description')
+
+    body = request.json
     token = request.headers['Authorization']
     self_id = decode_jwt(token)
-    procedure = f'exec post_complaints {self_id}, {user_id}, {reason}, {description}'
+    procedure = f'exec post_complaints {self_id}, {user_id}, {body["reason"]}, {body["description"]}'
     response = db.execute_procedure(procedure)[0]
     if response[0] == 'complaints in db':
         return jsonify(error=response[0])
