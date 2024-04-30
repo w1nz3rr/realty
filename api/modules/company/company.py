@@ -41,3 +41,4 @@ def delete_company(type, company_id):
         return abort(404)
     else:
         return jsonify(status=result[0][0])
+
