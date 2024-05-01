@@ -38,9 +38,7 @@ def put_specialist(type, specialist_id):
 def delete_specialist(type, specialist_id):
     procedure = f'exec delete_specialist {type}, {specialist_id}'
     result = db.execute_procedure(procedure)
-    if not result:
-        return jsonify(error='no specialist')
-    elif result[0][0] == 'error':
+    if result[0][0] == 'error':
         return abort(404)
     else:
         return jsonify(status=result[0][0])

@@ -5,16 +5,13 @@ localhost/api/
 --/registration - регистрация (post) +
 ++
 
+
 -/company - компании (нотариус | юрист | риелтор) (no method) +
 --/(lawyer|realtor|notary|) -  список компаний (нотариус | юрист | риелтор) (get, post) ++
 ---/<company_id> - конкретная компания (get, put, delete) +++
-++
-
-продумать взаимодействие этих модулей -
-
--/specialist - специалисты (no method) +
---/(lawyer|realtor|notary|) - специалисты этой области (get, post) ++
----/<specialist_id> конкретный специалист (get, put, delete) +++
+----/specialist - специалисты этой компании (get, post) посмотреть специалистов этой компании/добавить нового специалиста в эту компанию ++
+-----/<specialist_id> - (delete) удалить специалиста из компании +
+-/specialists/<type>/<specialist_id> конкретный специалист (get, put, delete) +++
 ++
 
 -/users - пользователи - (no method) +
@@ -26,9 +23,19 @@ localhost/api/
 --/me - посмотреть себя (get, put) ++
 ---/requisites - реквизиты (get, post) ++
 ----/<requisite_id> - конкретный реквизит (get, put, delete) +++
----/favourites - избранное (get, post) + (post, delete проверить после того как будет дописано объявление)
-----/<favourites_id> - конкретное объявление из избранного (delete)
-+-
+---/favourites - избранное (get, post) ++
+----/<favourites_id> - конкретное объявление из избранного (delete) +
+++
+
+-/objects - объекты - (get, post) ++
+--/<object_id> - конкретный объект (get, put) ++
+++
+
+дополнение к объекту
+---/passport - паспорт объекта (get, put) (id = 1: null)
+----/contractor - информация о подрядчике (get, put) (id = 1: null)
+----/builder - информация о застройщике (get, put) (id = 1: null)
+
 
 --/chats - чаты (get, post)
 ---/<chat_id> - конкретный чат (get, delete)
@@ -39,15 +46,7 @@ localhost/api/
 -/advertisements - объявления (get, post)
 --/<advertisement_id> - конкретное объявление (get, put, delete)
 ---/reviews - отзывы (get, post)
-----/<reviews_id> - конкретный отзыв (get, put, delete)
-
-
--/objects - объекты - (get, post)
---/<object_id> - конкретный объект (get, put, delete)
----/address - адрес объекта (get, put)
----/passport - паспорт объекта (get, put)
-----/contractor - информация о подрядчике (get, put)
-----/builder - информация о застройщике (get, put)
+----/<reviews_id> - конкретный отзыв (delete)
 
 
 -/deals - сделки (get, post)

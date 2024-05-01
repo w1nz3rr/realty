@@ -18,11 +18,11 @@ def get_favourites():
     response = []
     for res in result:
         response.append({'favourite_id': res[0], 'advertisements_id': res[1]})
-    return jsonify(requisites=response)
+    return jsonify(favourite=response)
 
 @favourites.post('/')
 @jwt_required()
-def post_requisites():
+def post_favourites():
     token = request.headers['Authorization']
     self_id = decode_jwt(token)
     body = request.json
@@ -36,11 +36,11 @@ def post_requisites():
     response = []
     for res in result:
         response.append({'favourite_id': res[0], 'advertisements_id': res[1]})
-    return jsonify(requisites=response)
+    return jsonify(favourite=response)
 
 @favourites.delete('/<favourite_id>')
 @jwt_required()
-def delete_requisite(favourite_id):
+def delete_favourite(favourite_id):
     token = request.headers['Authorization']
     self_id = decode_jwt(token)
     body = request.json
@@ -49,4 +49,4 @@ def delete_requisite(favourite_id):
     result = db.execute_procedure(procedure)
     if result[0][0] == 'no favourites':
         return jsonify(error='no favourites')
-    return jsonify(requisites=result[0][0])
+    return jsonify(favourite=result[0][0])
