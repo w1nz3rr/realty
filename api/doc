@@ -8,13 +8,14 @@ localhost/api/
 -/company - компании (нотариус | юрист | риелтор) (no method) +
 --/(lawyer|realtor|notary|) -  список компаний (нотариус | юрист | риелтор) (get, post) ++
 ---/<company_id> - конкретная компания (get, put, delete) +++
+++
 
-продумать взаимодействие этих модулей
+продумать взаимодействие этих модулей -
 
 -/specialist - специалисты (no method) +
 --/(lawyer|realtor|notary|) - специалисты этой области (get, post) ++
 ---/<specialist_id> конкретный специалист (get, put, delete) +++
-
+++
 
 -/users - пользователи - (no method) +
 --/<user_id> - посмотреть конкретного пользователя (get) +
@@ -22,12 +23,12 @@ localhost/api/
 ---/blacklist - чёрный список (post, delete) ++
 ++
 
---/me - посмотреть себя (get, put, delete)
----/requisites - реквизиты (get, post)
-----/<requisite_id> - конкретный реквизит (get, put, delete)
----/favourites - избранное (get, post)
-----/<favourites_id> - конкретное объявление из избранного (get, delete)
-
+--/me - посмотреть себя (get, put) ++
+---/requisites - реквизиты (get, post) ++
+----/<requisite_id> - конкретный реквизит (get, put, delete) +++
+---/favourites - избранное (get, post) + (post, delete проверить после того как будет дописано объявление)
+----/<favourites_id> - конкретное объявление из избранного (delete)
++-
 
 --/chats - чаты (get, post)
 ---/<chat_id> - конкретный чат (get, delete)

@@ -22,7 +22,6 @@ def get_complaints(user_id):
 @jwt_required()
 @complaints.post('/')
 def post_complaints(user_id):
-
     body = request.json
     token = request.headers['Authorization']
     self_id = decode_jwt(token)
