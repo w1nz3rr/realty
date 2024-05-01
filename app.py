@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_jwt_extended import JWTManager
-from api.modules.auth.auth import auth
+from api.modules.users.auth.auth import auth
 from api.modules.users.users import users
 from api.modules.users.blacklist import blacklist
 from api.modules.agents.company.companyes import companyes
@@ -12,8 +12,8 @@ from api.modules.users.me import me
 from api.modules.users.requisites.requisites import requisites
 from api.modules.users.requisites.requisite import requisite
 from api.modules.users.favourites import favourites
-from api.modules.objects.objects import objects
-from api.modules.objects.object import object
+from api.modules.adverisements.objects.objects import objects
+from api.modules.adverisements.objects.object import object
 
 app = Flask(__name__)
 jwt = JWTManager(app)

@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from api.DB.db import DB
-from api.modules.auth.jwt_token import *
+from api.modules.users.auth.jwt_token import *
 
 blacklist = Blueprint('blacklist', __name__, url_prefix='/api/users/<user_id>/blacklist')
 db = DB()

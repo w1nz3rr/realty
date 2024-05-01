@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from api.modules.auth.jwt_token import *
+from api.modules.users.auth.jwt_token import *
 from api.DB.db import DB
 
 object = Blueprint('object', __name__, url_prefix='/api/objects/<object_id>')

@@ -1,5 +1,4 @@
 from flask import Blueprint, jsonify, request, abort
-from api.modules.auth.jwt_token import *
 from api.DB.db import DB
 
 specialist = Blueprint('specialist', __name__, url_prefix='/api/specialists/<type>/<specialist_id>')
