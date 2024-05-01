@@ -3,11 +3,11 @@ from flask_jwt_extended import JWTManager
 from api.modules.auth.auth import auth
 from api.modules.users.users import users
 from api.modules.users.blacklist import blacklist
-from api.agents.company.companyes import companyes
-from api.agents.company.company import company
+from api.modules.agents.company.companyes import companyes
+from api.modules.agents.company.company import company
 from api.modules.users.complaints import complaints
-from api.agents.specialist.specialists import specialists
-from api.agents.specialist.specialist import specialist
+from api.modules.agents.specialist.specialists import specialists
+from api.modules.agents.specialist.specialist import specialist
 from api.modules.users.me import me
 from api.modules.users.requisites.requisites import requisites
 from api.modules.users.requisites.requisite import requisite
