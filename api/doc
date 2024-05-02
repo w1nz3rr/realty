@@ -32,24 +32,25 @@ localhost/api/
 --/chats - чаты (get, post) ++
 ---/<chat_id> - конкретный чат (?)
 ----/messages - все сообщения этого чата (get, post) ++
------/<message_id> - конкретное сообщение (get, put, delete)
---
+-----/<message_id> - конкретное сообщение (?)
++?
+
+-/advertisements - объявления (get, post) ++
+--/<advertisement_id> - конкретное объявление (get, put, delete) +++
+++
 
 -/objects - объекты - (get, post) ++
 --/<object_id> - конкретный объект (get, put) ++
-+-
+++
 
-дополнение к объекту
+дополнение к объекту -
 --/passport - паспорт объекта (get, post)
 ---/<passport_id> - конкретный паспорт (get, put)
 --/contractor - информация о подрядчике (get, post)
 ---/<contractor_id> - конкретный подрядчик (get, put)
 --/builder - информация о застройщике (get, post)
 ---/<builder_id> - конкретный застройщик (get, put)
-
--/advertisements - объявления (get, post) ++
---/<advertisement_id> - конкретное объявление (get, put, delete) +++
-++
+--
 
 -/deals - сделки (get, post)
 --/<deal_id> - сделка (get, put, delete)

@@ -83,3 +83,5 @@ if modules['users']['chats']['chats']:
 if modules['users']['chats']['messages']:
     from api.modules.users.chats.messages.messages import messages
     app.register_blueprint(messages)
+    from api.modules.users.chats.messages.message import message
+    app.register_blueprint(message)
