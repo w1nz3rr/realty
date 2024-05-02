@@ -18,6 +18,8 @@ localhost/api/
 --/<user_id> - посмотреть конкретного пользователя (get) +
 ---/complaints - жалоба (get, post) ++
 ---/blacklist - чёрный список (post, delete) ++
+--/reviews - отзывы (get, post) ++
+---/<review_id> - конкретный отзыв (delete)+
 ++
 
 --/me - посмотреть себя (get, put) ++
@@ -27,9 +29,15 @@ localhost/api/
 ----/<favourites_id> - конкретное объявление из избранного (delete) +
 ++
 
+--/chats - чаты (get, post)
+---/<chat_id> - конкретный чат (get, delete)
+----/message - все сообщения этого чата (get, post)
+-----/<message_id> - конкретное сообщение (get, put, delete)
+
+
 -/objects - объекты - (get, post) ++
 --/<object_id> - конкретный объект (get, put) ++
-++
++-
 
 дополнение к объекту
 ---/passport - паспорт объекта (get, put) (id = 1: null)
@@ -37,17 +45,9 @@ localhost/api/
 ----/builder - информация о застройщике (get, put) (id = 1: null)
 
 
---/chats - чаты (get, post)
----/<chat_id> - конкретный чат (get, delete)
-----/message - все сообщения этого чата (get, post)
------/<message_id> - конкретное сообщение (get, put, delete)
-
-
--/advertisements - объявления (get, post)
---/<advertisement_id> - конкретное объявление (get, put, delete)
----/reviews - отзывы (get, post)
-----/<reviews_id> - конкретный отзыв (delete)
-
+-/advertisements - объявления (get, post) ++
+--/<advertisement_id> - конкретное объявление (get, put, delete) +++
+++
 
 -/deals - сделки (get, post)
 --/<deal_id> - сделка (get, put, delete)
