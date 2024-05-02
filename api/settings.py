@@ -8,7 +8,11 @@ modules = {
         'users': True,
         'other': True,
         'requisites': True,
-        'reviews': True
+        'reviews': True,
+        'chats': {
+            'chats': True,
+            'messages': True
+        }
     },
     'agents':{
         'company': True,
@@ -17,7 +21,6 @@ modules = {
     'subject':{
         'objects': True,
         'advertisements': True
-
     }
 }
 
@@ -72,3 +75,11 @@ if modules['subject']['advertisements']:
 if modules['users']['reviews']:
     from api.modules.users.reviews.reviews import reviews
     app.register_blueprint(reviews)
+
+if modules['users']['chats']['chats']:
+    from api.modules.users.chats.chats import chats
+    app.register_blueprint(chats)
+
+if modules['users']['chats']['messages']:
+    from api.modules.users.chats.messages.messages import messages
+    app.register_blueprint(messages)
